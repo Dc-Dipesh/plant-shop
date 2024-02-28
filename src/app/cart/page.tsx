@@ -55,6 +55,13 @@ const Cart: FC = () => {
               </div>
             </div>
           ))}
+          {items.length === 0 && (
+            <div className='flex justify-center items-center h-80'>
+              <h1 className='text-xl font-bold text-black'>
+                Your cart is empty
+              </h1>
+            </div>
+          )}
         </div>
         <div className='md:col-span-2 bg-white/80 text-black/70 shadow-lg ring-1 ring-black/5 rounded-xl p-3 h-fit'>
           {/* Total */}
