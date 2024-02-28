@@ -1,7 +1,6 @@
 "use client"
 
-import Headline from "@/components/Headline"
-import { Contact2, Filter, Mail, Smartphone } from "lucide-react"
+import { Contact2, Mail, Smartphone } from "lucide-react"
 import Image from "next/image"
 
 const Page = () => {

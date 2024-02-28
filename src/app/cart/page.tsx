@@ -1,17 +1,20 @@
-import Headline from "@/components/Headline"
-import { ICart, IPlants } from "@/types"
+"use client"
+
 import Image from "next/image"
 import { FC } from "react"
-
+import { useCart } from "@/components/CartContext"
+import toast, { Toaster } from "react-hot-toast"
 const Cart: FC = () => {
+  const { items, getTotalPrice, removeItem, incrementItem, decrementItem } =
+    useCart()
   return (
     <div className=''>
       <div className=' grid grid-cols-1 md:grid-cols-5 gap-10'>
         <div className='md:col-span-3 bg-white/80 text-black/70 shadow-lg ring-1 ring-black/5 rounded-xl p-3'>
           {/* Cart Page design */}
           <h1 className='font-bold text-2xl text-black '>Your Cart</h1>
-          {cartPlants.map((plant, index) => (
-            <div key={index} className='flex gap-5 p-3'>
+          {items.map((plant, index) => (
+            <div key={index} className='flex justify-between gap-10 p-3'>
               <div className='relative aspect-[4/3] w-80'>
                 <Image
                   fill
@@ -25,14 +28,30 @@ const Cart: FC = () => {
                 <p className='text-lg font-light text-black'>${plant.price}</p>
                 {/* Quantity */}
                 <div className='flex gap-2'>
-                  <button className='bg-black/80 text-white px-3 rounded-lg'>
+                  <button
+                    className='bg-black/80 text-white px-3 rounded-lg'
+                    onClick={() => decrementItem(plant?.slug)}
+                    disabled={plant.quantity == 1}>
                     -
                   </button>
                   <span>{plant.quantity}</span>
-                  <button className='bg-black/80 text-white px-3 rounded-lg'>
+                  <button
+                    className='bg-black/80 text-white px-3 rounded-lg'
+                    onClick={() => incrementItem(plant?.slug)}>
                     +
                   </button>
                 </div>
+              </div>
+              {/* remove button */}
+              <div className='flex items-center justify-end '>
+                <button
+                  className='bg-black/80 text-white p-3 rounded-lg h-fit'
+                  onClick={() => {
+                    removeItem(plant.slug)
+                    toast.success("item removed from cart.")
+                  }}>
+                  Remove
+                </button>
               </div>
             </div>
           ))}
@@ -43,7 +62,9 @@ const Cart: FC = () => {
             <h1 className='text-xl font-bold text-black'>Total</h1>
             <div className='flex justify-between'>
               <h1 className='text-lg font-light text-black'>Subtotal</h1>
-              <p className='text-lg font-light text-black'>$65</p>
+              <p className='text-lg font-light text-black'>
+                ${getTotalPrice()}
+              </p>
             </div>
             <div className='flex justify-between'>
               <h1 className='text-lg font-light text-black'>Shipping</h1>
@@ -51,7 +72,9 @@ const Cart: FC = () => {
             </div>
             <div className='flex justify-between'>
               <h1 className='text-lg font-light text-black'>Total</h1>
-              <p className='text-lg font-light text-black'>$70</p>
+              <p className='text-lg font-light text-black'>
+                ${getTotalPrice() + 5}
+              </p>
             </div>
             <button className='bg-black/80 text-white p-3 rounded-lg'>
               Checkout
@@ -59,34 +82,8 @@ const Cart: FC = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   )
 }
 export default Cart
-
-const cartPlants: ICart[] = [
-  {
-    image: "/images/plant1.png",
-    name: "Monstera",
-    price: 20,
-    quantity: 1,
-    alt: "Monstera plant",
-    slug: "monstera",
-  },
-  {
-    image: "/images/plant2.png",
-    name: "Fiddle Leaf Fig",
-    price: 30,
-    quantity: 2,
-    alt: "Fiddle Leaf Fig plant",
-    slug: "fiddle-leaf-fig",
-  },
-  {
-    image: "/images/plant3.png",
-    name: "Snake Plant",
-    quantity: 1,
-    price: 15,
-    alt: "Snake plant",
-    slug: "snake-plant",
-  },
-]

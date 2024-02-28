@@ -1,22 +1,23 @@
-import Headline from "@/components/Headline"
-import { Pagination } from "@/components/Pagination"
+"use client"
+
 import PlantCard from "@/components/PlantCard"
-import { IPlants } from "@/types"
-import { Filter } from "lucide-react"
-import { ParsedUrlQuery } from "querystring"
+
+import { Filter, Plus } from "lucide-react"
+
 import { FC } from "react"
 import AllPlants from "@/data.json"
-interface IProps {
-  searchParams: ParsedUrlQuery
-}
-const page: FC<IProps> = ({ searchParams }) => {
-  const limit = 8
-  const page: number = parseInt(searchParams.page as string) || 1
-  const TotalPage = Math.ceil(AllPlants.length / 8)
-
+import React from "react"
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
+import { useCart } from "@/components/CartContext"
+// Import Swiper styles
+import "swiper/css"
+import toast, { Toaster } from "react-hot-toast"
+const Page: FC = () => {
+  const { addItem } = useCart()
   return (
     <>
-      <div className='bg-white/80 text-black/70 shadow-lg ring-1 ring-black/5 h-full w-full rounded-xl p-3'>
+      <div className='bg-white/80 text-black/70 shadow-lg ring-1 ring-black/5 h-full mb-52 rounded-xl p-3 '>
         <div className='flex justify-between items-center'>
           <div className='rounded-full bg-white w-fit h-fit p-2 '>
             <Filter size={20} />
@@ -51,18 +52,60 @@ const page: FC<IProps> = ({ searchParams }) => {
           </div>
         </div>
 
-        <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-          {AllPlants.slice((page - 1) * limit, limit * page)?.map(
-            (plant, index) => (
-              <PlantCard key={index} {...plant} />
-            )
-          )}
-        </div>
+        <Swiper
+          spaceBetween={0}
+          centeredSlides={true}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 40,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 50,
+            },
+          }}
+          className='mySwiper h-[calc(100%+100px)]'>
+          {AllPlants?.map((plant, index) => (
+            <SwiperSlide key={index}>
+              <div className=''>
+                <PlantCard key={index} {...plant} />
+                <div className='w-full z-10 addtocart'>
+                  <div className='mt-5 w-full flex justify-center'>
+                    <div className='flex flex-row bg-white/50 text-black/70 shadow-lg ring-1 ring-black/5 p-5 rounded-full w-fit gap-5'>
+                      <div className=' flex-col'>
+                        <h1 className='font-medium text-black text-md flex  '>
+                          {plant.name}
+                        </h1>
+                        <p className='text-md md:text-2xl text-black'>
+                          ${plant.price}
+                        </p>
+                      </div>
+                      <button
+                        className='bg-white text-black p-2 px-4 rounded-full flex gap-1 justify-center items-center '
+                        onClick={() => {
+                          addItem(plant)
+                          toast.success("item added to cart.")
+                        }}>
+                        <Plus /> Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-      <div className='flex justify-center mt-5'>
+      {/* <div className='flex justify-center mt-5'>
         <Pagination TotalPage={TotalPage} />
-      </div>
+      </div> */}
+      <Toaster />
     </>
   )
 }
-export default page
+export default Page

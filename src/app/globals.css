@@ -7,3 +7,25 @@
     @apply bg-white rounded-full p-1;
   }
 }
+.swiper-slide {
+  transform: scale(0.6) !important;
+  transition: transform 0.3s;
+}
+
+.swiper-slide-active {
+  transform: scale(1) !important;
+}
+
+.addtocart {
+  display: none;
+}
+.swiper-slide-active .addtocart {
+  display: block;
+  margin-bottom: 10px;
+}
+.swiper-slide-active .price {
+  display: none;
+}
+.swiper-slide-active .name {
+  display: none;
+}

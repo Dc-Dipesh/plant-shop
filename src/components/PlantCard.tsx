@@ -7,24 +7,18 @@ const PlantCard: FC<IPlants> = ({ image, name, price, alt, slug }) => {
   return (
     <div className='w-full'>
       <div className='relative aspect-[4/3]'>
-        <Link href={`/shop/${slug}`}>
-          <Image
-            src={image}
-            fill
-            sizes='(min-width: 640px) 100vw, (min-width: 768px) 50vw, 25vw'
-            alt={alt}
-            className='object-contain rounded-xl'
-          />
-        </Link>
+        <Image
+          src={image}
+          fill
+          sizes='(min-width: 640px) 100vw, (min-width: 768px) 50vw, 25vw'
+          alt={alt}
+          className='object-contain rounded-xl'
+        />
       </div>
-      <div className='flex flex-col gap-2 p-3 items-center'>
-        {name && (
-          <Link href={`/shop/${slug}`} className='text-xl font-bold text-black'>
-            {name}
-          </Link>
-        )}
+      <div className='flex flex-col gap-2 p-3 items-center price'>
+        {name && <h1 className='text-xl font-bold text-black'>{name}</h1>}
 
-        {price && <p className='text-lg font-light text-black'>${price}</p>}
+        {price && <p className='text-lg font-light text-black '>${price}</p>}
       </div>
     </div>
   )
