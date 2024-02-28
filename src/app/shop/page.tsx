@@ -5,7 +5,7 @@ import { IPlants } from "@/types"
 import { Filter } from "lucide-react"
 import { ParsedUrlQuery } from "querystring"
 import { FC } from "react"
-
+import AllPlants from "@/data.json"
 interface IProps {
   searchParams: ParsedUrlQuery
 }
@@ -66,75 +66,3 @@ const page: FC<IProps> = ({ searchParams }) => {
   )
 }
 export default page
-const AllPlants: IPlants[] = [
-  {
-    image: "/images/plant1.png",
-    name: "Monstera",
-    price: 20,
-    alt: "Monstera plant",
-    slug: "monstera",
-  },
-  {
-    image: "/images/plant2.png",
-    name: "Fiddle Leaf Fig",
-    price: 30,
-    alt: "Fiddle Leaf Fig plant",
-    slug: "fiddle-leaf-fig",
-  },
-  {
-    image: "/images/plant3.png",
-    name: "Snake Plant",
-    price: 15,
-    alt: "Snake plant",
-    slug: "snake-plant",
-  },
-  {
-    image: "/images/plant4.png",
-    name: "Peace Lily",
-    price: 25,
-    alt: "Peace Lily plant",
-    slug: "peace-lily",
-  },
-  {
-    image: "/images/plant5.png",
-    name: "Rubber Plant",
-    price: 20,
-    alt: "Rubber plant",
-    slug: "rubber-plant",
-  },
-  {
-    image: "/images/plant6.png",
-    name: "Anthurium",
-    price: 15,
-    alt: "Anthurium plant",
-    slug: "anthurium",
-  },
-  {
-    image: "/images/plant7.png",
-    name: "Yellow Rose",
-    price: 20,
-    alt: "Yellow Rose",
-    slug: "yellow-rose",
-  },
-  {
-    image: "/images/plant8.png",
-    name: "Aloe Vera",
-    price: 10,
-    alt: "Aloe Vera plant",
-    slug: "aloe-vera",
-  },
-  {
-    image: "/images/plant9.png",
-    name: "Spider Plant",
-    price: 15,
-    alt: "Spider plant",
-    slug: "spider-plant",
-  },
-  {
-    image: "/images/plant10.png",
-    name: "African violet",
-    price: 25,
-    alt: "African violet",
-    slug: "african-violet",
-  },
-]

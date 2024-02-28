@@ -1,6 +1,6 @@
 export interface IPlants {
   image: string
-  name: string
+  name?: string
   price?: number
   alt: string
   slug: string

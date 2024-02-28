@@ -3,8 +3,10 @@ import Headline from "@/components/Headline"
 import PlantCard from "@/components/PlantCard"
 import { IPlants } from "@/types"
 import Image from "next/image"
-
+import allPlants from "@/data.json"
+import { useRandomSelection } from "@/components/helper"
 export default function Home() {
+  const FeaturedPlant = useRandomSelection(allPlants, 4)
   return (
     <>
       {/* hero section */}
@@ -56,7 +58,7 @@ export default function Home() {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-10 '>
               <div className='flex items-center justify-center flex-col gap-4 order-2 md:order-1 px-2 '>
                 <h2 className='mb-4 text-center font-bold text-black'>
-                  More than just a plant shop, we're plant enthusiasts!
+                  More than just a plant shop, we&apos;re plant enthusiasts!
                 </h2>
                 <p
                   className='text-black'
@@ -88,38 +90,6 @@ export default function Home() {
     </>
   )
 }
-
-const FeaturedPlant: IPlants[] = [
-  {
-    image: "/images/plant1.png",
-    name: "Monstera",
-    price: 20,
-    alt: "Monstera plant",
-    slug: "monstera",
-  },
-  {
-    image: "/images/plant2.png",
-    name: "Fiddle Leaf Fig",
-    price: 30,
-    alt: "Fiddle Leaf Fig plant",
-    slug: "fiddle-leaf-fig",
-  },
-  {
-    image: "/images/plant3.png",
-    name: "Snake Plant",
-    price: 15,
-    alt: "Snake plant",
-    slug: "snake-plant",
-  },
-  {
-    image: "/images/plant4.png",
-    name: "Peace Lily",
-    price: 25,
-    alt: "Peace Lily plant",
-    slug: "peace-lily",
-  },
-]
-
 const Categories: IPlants[] = [
   {
     image: "/images/category1.jpg",

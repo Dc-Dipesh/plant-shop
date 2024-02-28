@@ -5,7 +5,7 @@ import { FC } from "react"
 
 const PlantCard: FC<IPlants> = ({ image, name, price, alt, slug }) => {
   return (
-    <div>
+    <div className='w-full'>
       <div className='relative aspect-[4/3]'>
         <Link href={`/shop/${slug}`}>
           <Image
@@ -18,10 +18,13 @@ const PlantCard: FC<IPlants> = ({ image, name, price, alt, slug }) => {
         </Link>
       </div>
       <div className='flex flex-col gap-2 p-3 items-center'>
-        <Link href={`/shop/${slug}`} className='text-xl font-bold text-black'>
-          {name}
-        </Link>
-        <p className='text-lg font-light text-black'>${price}</p>
+        {name && (
+          <Link href={`/shop/${slug}`} className='text-xl font-bold text-black'>
+            {name}
+          </Link>
+        )}
+
+        {price && <p className='text-lg font-light text-black'>${price}</p>}
       </div>
     </div>
   )
