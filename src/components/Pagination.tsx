@@ -37,8 +37,10 @@ export const Pagination: FC<{ TotalPage: number }> = ({ TotalPage }) => {
               return (
                 <Link
                   href={`${pathname}/?${newSearchParams.toString()}`}
-                  className={`relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-fuchsia-100 hover:bg-fuchsia-200 cursor-pointer leading-5 rounded-md transition duration-150 ease-in-out focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 ${
-                    Page === (item + 1).toString() && "bg-fuchsia-200"
+                  className={` relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 border border-fuchsia-100 hover:bg-fuchsia-200 cursor-pointer leading-5 rounded-md transition duration-150 ease-in-out focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 ${
+                    Page === (item + 1).toString()
+                      ? "bg-fuchsia-200"
+                      : "bg-white"
                   }`}
                   key={index}>
                   {item + 1}
