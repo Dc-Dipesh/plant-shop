@@ -1,7 +1,5 @@
 "use client"
 
-import PlantCard from "@/components/PlantCard"
-
 import { Filter, Plus } from "lucide-react"
 
 import { FC } from "react"
@@ -13,6 +11,7 @@ import { useCart } from "@/components/CartContext"
 // Import Swiper styles
 import "swiper/css"
 import toast, { Toaster } from "react-hot-toast"
+import PlantCard from "@/components/PlantCard"
 const Page: FC = () => {
   const { addItem } = useCart()
   return (

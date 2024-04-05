@@ -1,3 +1,4 @@
+"use server"
 import CategoryCard from "@/components/CategoryCard"
 import Headline from "@/components/Headline"
 import PlantCard from "@/components/PlantCard"
@@ -5,8 +6,11 @@ import { IPlants } from "@/types"
 import Image from "next/image"
 import allPlants from "@/data.json"
 import { useRandomSelection } from "@/components/helper"
-export default function Home() {
-  const FeaturedPlant = useRandomSelection(allPlants, 4)
+import { connectDb } from "@/server/db"
+import { Plant } from "@/server/schemas"
+import { getPlants, savePlant } from "../../../_actionns/PlantActions"
+export default async function Home() {
+  const FeaturedPlant = await getPlants()
   return (
     <>
       {/* hero section */}
@@ -45,9 +49,9 @@ export default function Home() {
         <section>
           <Headline title='Categories' />
           <div className='mt-10  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-5 px-5'>
-            {Categories?.map((category, index) => (
+            {/* {Categories?.map((category, index) => (
               <CategoryCard key={index} {...category} />
-            ))}
+            ))} */}
           </div>
         </section>
         {/* About us */}
@@ -90,29 +94,29 @@ export default function Home() {
     </>
   )
 }
-const Categories: IPlants[] = [
-  {
-    image: "/images/category1.jpg",
-    name: "Indoor Plants",
-    alt: "Indoor plants",
-    slug: "indoor-plants",
-  },
-  {
-    image: "/images/category2.jpg",
-    name: "Outdoor Plants",
-    alt: "Outdoor plants",
-    slug: "outdoor-plants",
-  },
-  {
-    image: "/images/category3.jpg",
-    name: "Office Plants",
-    alt: "Office plants",
-    slug: "office-plants",
-  },
-  {
-    image: "/images/category4.jpg",
-    name: "Flowering Plants",
-    alt: "Flowering plants",
-    slug: "flowering-plants",
-  },
-]
+// const Categories: IPlants[] = [
+//   {
+//     image: "/images/category1.jpg",
+//     name: "Indoor Plants",
+//     alt: "Indoor plants",
+//     slug: "indoor-plants",
+//   },
+//   {
+//     image: "/images/category2.jpg",
+//     name: "Outdoor Plants",
+//     alt: "Outdoor plants",
+//     slug: "outdoor-plants",
+//   },
+//   {
+//     image: "/images/category3.jpg",
+//     name: "Office Plants",
+//     alt: "Office plants",
+//     slug: "office-plants",
+//   },
+//   {
+//     image: "/images/category4.jpg",
+//     name: "Flowering Plants",
+//     alt: "Flowering plants",
+//     slug: "flowering-plants",
+//   },
+// ]
